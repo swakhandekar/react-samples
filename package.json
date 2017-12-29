@@ -1,0 +1,10 @@
+{
+  "name": "react-samples",
+  "version": "1.0.0",
+  "description": "React code samples",
+  "main": "index.js",
+  "repository": "git@github.com:swakhandekar/react-samples.git",
+  "author": "Swapnil Khandekar",
+  "license": "MIT",
+  "private": false
+}
