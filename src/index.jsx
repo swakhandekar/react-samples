@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import {FormBefore} from "../src/components/form/before/FormBefore"
 
 
-ReactDOM.render(<FormBefore/>,
+ReactDOM.render(
+    <FormBefore />,
     document.getElementById("example")
 );
