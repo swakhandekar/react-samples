@@ -7,6 +7,7 @@ export class FormBefore extends React.Component {
         this.state = {
             validTextField: true,
             validNumberField: true,
+            validPasswordField: true,
         };
 
         this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -21,33 +22,44 @@ export class FormBefore extends React.Component {
         return !!(number || number === 0);
     }
 
+    isValidPasswordField(value) {
+        return !!(value && value.length >= 6);
+    }
+
     onFormSubmit(event) {
         event.preventDefault();
 
         const textFieldValue = event.target[0].value;
         const numberFieldValue = event.target[1].value;
+        const passwordFieldValue = event.target[2].value;
 
-        let validTextField = true, validNumberField = true;
+        let validTextField = true, validNumberField = true, validPasswordField = true;
         if (!this.isValidTextField(textFieldValue)) {
             validTextField = false;
         }
         if (!this.isValidNumberField(numberFieldValue)) {
             validNumberField = false;
         }
-        if (validNumberField && validTextField) {
+        if (!this.isValidPasswordField(passwordFieldValue)) {
+            validPasswordField = false;
+        }
+        if (validNumberField && validTextField && validPasswordField) {
             this.setState({
                 validTextField: true,
-                validNumberField: true
+                validNumberField: true,
+                validPasswordField: true
             });
             const data = {
                 textFieldValue: textFieldValue,
                 numberFieldValue: numberFieldValue,
+                passwordFieldValue: passwordFieldValue,
             };
             this.props.postForm(data);
         } else {
             this.setState({
                 validTextField: validTextField,
-                validNumberField: validNumberField
+                validNumberField: validNumberField,
+                validPasswordField: validPasswordField
             });
         }
     }
@@ -73,6 +85,9 @@ export class FormBefore extends React.Component {
                     <div className="form-password-field">
                         <span>Password field: </span>
                         <input type="password" placeholder="password field"/>
+                        <div className="error-message">
+                            {!this.state.validPasswordField && "Password must be at least of 6 characters"}
+                        </div>
                     </div>
                     <div>
                         <button type="submit">Submit</button>

@@ -54,7 +54,8 @@ describe("FormBefore component", () => {
                 preventDefault: () => (null),
                 target: [
                     {value: ''},
-                    {value: 123}
+                    {value: 123},
+                    {value: "abcdefg"},
                 ]
             });
 
@@ -68,7 +69,8 @@ describe("FormBefore component", () => {
                 preventDefault: () => (null),
                 target: [
                     {value: 'some value'},
-                    {value: 123}
+                    {value: 123},
+                    {value: "abcdefg"},
                 ]
             });
 
@@ -105,7 +107,8 @@ describe("FormBefore component", () => {
                 preventDefault: () => (null),
                 target: [
                     {value: 'Some value'},
-                    {value: ''}
+                    {value: ''},
+                    {value: "abcdefg"},
                 ]
             });
 
@@ -119,7 +122,8 @@ describe("FormBefore component", () => {
                 preventDefault: () => (null),
                 target: [
                     {value: 'some value'},
-                    {value: ''}
+                    {value: ''},
+                    {value: "abcdefg"}
                 ]
             });
 
@@ -132,8 +136,10 @@ describe("FormBefore component", () => {
     describe('field 3', function () {
         let span;
         let inputField;
+        let component
         beforeEach(() => {
-            span = getComponent().find('form').childAt(2);
+            component = getComponent();
+            span = component.find('form').childAt(2);
             inputField = span.find('input');
         });
 
@@ -148,5 +154,36 @@ describe("FormBefore component", () => {
         it('should have input field with placeholder', function () {
             expect(inputField.props().placeholder).toBe('password field');
         });
+
+        it('should show error message on submit if the text entered is not valid', function () {
+            let form = component.find('form');
+            form.simulate('submit', {
+                preventDefault: () => (null),
+                target: [
+                    {value: 'Some value'},
+                    {value: 123},
+                    {value: 'ag'},
+                ]
+            });
+
+            form = component.find('form');
+            expect(form.childAt(2).find('.error-message').text()).toBe('Password must be at least of 6 characters');
+        });
+
+        it('should not show error message on submit if the text entered is valid', function () {
+            let form = component.find('form');
+            form.simulate('submit', {
+                preventDefault: () => (null),
+                target: [
+                    {value: 'some value'},
+                    {value: 123},
+                    {value: "abcdefg"},
+                ]
+            });
+
+            form = component.find('form');
+            expect(form.childAt(2).find('.error-message').text()).toBe('');
+        });
+
     });
 });
