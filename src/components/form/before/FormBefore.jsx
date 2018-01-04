@@ -4,13 +4,35 @@ export class FormBefore extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            validTextField: true,
+        };
+
         this.onFormSubmit = this.onFormSubmit.bind(this);
+    }
+
+    isValidTextField(value) {
+        return !!(value && value.length > 0);
     }
 
     onFormSubmit(event) {
         event.preventDefault();
-        const data = {};
-        this.props.postForm(data);
+
+        const textFieldValue = event.target[0].value;
+        if (!this.isValidTextField(textFieldValue)) {
+            this.setState({
+                validTextField: false
+            });
+        }
+        else {
+            this.setState({
+                validTextField: true
+            });
+            const data = {
+                textFieldValue: textFieldValue,
+            };
+            this.props.postForm(data);
+        }
     }
 
     render() {
@@ -20,6 +42,9 @@ export class FormBefore extends React.Component {
                     <div className="form-text-field">
                         <span>Text field: </span>
                         <input type="text" placeholder="text field"/>
+                        <div className="error-message">
+                            {!this.state.validTextField && "Please enter a valid text"}
+                        </div>
                     </div>
                     <div className="form-number-field">
                         <span>Number field: </span>
@@ -37,3 +62,7 @@ export class FormBefore extends React.Component {
         );
     }
 }
+
+FormBefore.defaultProps = {
+    postForm: (data) => (console.log(data)),
+};
