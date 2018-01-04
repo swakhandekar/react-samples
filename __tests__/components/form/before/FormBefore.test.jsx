@@ -53,7 +53,8 @@ describe("FormBefore component", () => {
             form.simulate('submit', {
                 preventDefault: () => (null),
                 target: [
-                    {value: ''}
+                    {value: ''},
+                    {value: 123}
                 ]
             });
 
@@ -66,7 +67,8 @@ describe("FormBefore component", () => {
             form.simulate('submit', {
                 preventDefault: () => (null),
                 target: [
-                    {value: 'some value'}
+                    {value: 'some value'},
+                    {value: 123}
                 ]
             });
 
@@ -78,8 +80,10 @@ describe("FormBefore component", () => {
     describe('field 2', function () {
         let span;
         let inputField;
+        let component;
         beforeEach(() => {
-            span = getComponent().find('form').childAt(1);
+            component = getComponent();
+            span = component.find('form').childAt(1);
             inputField = span.find('input');
         });
 
@@ -94,6 +98,35 @@ describe("FormBefore component", () => {
         it('should have input field with placeholder', function () {
             expect(inputField.props().placeholder).toBe('number field');
         });
+
+        it('should show error message on submit if the text entered is not valid', function () {
+            let form = component.find('form');
+            form.simulate('submit', {
+                preventDefault: () => (null),
+                target: [
+                    {value: 'Some value'},
+                    {value: ''}
+                ]
+            });
+
+            form = component.find('form');
+            expect(form.childAt(1).find('.error-message').text()).toBe('Please enter a valid number');
+        });
+
+        it('should not show error message on submit if the text entered is valid', function () {
+            let form = component.find('form');
+            form.simulate('submit', {
+                preventDefault: () => (null),
+                target: [
+                    {value: 'some value'},
+                    {value: ''}
+                ]
+            });
+
+            form = component.find('form');
+            expect(form.childAt(0).find('.error-message').text()).toBe('');
+        });
+
     });
 
     describe('field 3', function () {

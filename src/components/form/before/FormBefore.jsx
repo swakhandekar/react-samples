@@ -6,6 +6,7 @@ export class FormBefore extends React.Component {
 
         this.state = {
             validTextField: true,
+            validNumberField: true,
         };
 
         this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -15,23 +16,39 @@ export class FormBefore extends React.Component {
         return !!(value && value.length > 0);
     }
 
+    isValidNumberField(value) {
+        let number = parseInt(value);
+        return !!(number || number === 0);
+    }
+
     onFormSubmit(event) {
         event.preventDefault();
 
         const textFieldValue = event.target[0].value;
+        const numberFieldValue = event.target[1].value;
+
+        let validTextField = true, validNumberField = true;
         if (!this.isValidTextField(textFieldValue)) {
-            this.setState({
-                validTextField: false
-            });
+            validTextField = false;
         }
-        else {
+        if (!this.isValidNumberField(numberFieldValue)) {
+            validNumberField = false;
+        }
+        if (validNumberField && validTextField) {
             this.setState({
-                validTextField: true
+                validTextField: true,
+                validNumberField: true
             });
             const data = {
                 textFieldValue: textFieldValue,
+                numberFieldValue: numberFieldValue,
             };
             this.props.postForm(data);
+        } else {
+            this.setState({
+                validTextField: validTextField,
+                validNumberField: validNumberField
+            });
         }
     }
 
@@ -49,6 +66,9 @@ export class FormBefore extends React.Component {
                     <div className="form-number-field">
                         <span>Number field: </span>
                         <input type="number" placeholder="number field"/>
+                        <div className="error-message">
+                            {!this.state.validNumberField && "Please enter a valid number"}
+                        </div>
                     </div>
                     <div className="form-password-field">
                         <span>Password field: </span>
