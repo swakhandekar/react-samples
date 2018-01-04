@@ -27,15 +27,15 @@ describe("FormBefore component", () => {
     });
 
     describe('field 1', function () {
-        let span1;
+        let span;
         let inputField;
         beforeEach(() => {
-            span1 = getComponent().find('form').childAt(0);
-            inputField = span1.find('input');
+            span = getComponent().find('form').childAt(0);
+            inputField = span.find('input');
         });
 
         it('should have field name text as "Text field"', function () {
-            expect(span1.text()).toBe("Text field: ");
+            expect(span.text()).toBe("Text field: ");
         });
 
         it('should have input field with type text', function () {
@@ -48,15 +48,15 @@ describe("FormBefore component", () => {
     });
 
     describe('field 2', function () {
-        let span1;
+        let span;
         let inputField;
         beforeEach(() => {
-            span1 = getComponent().find('form').childAt(1);
-            inputField = span1.find('input');
+            span = getComponent().find('form').childAt(1);
+            inputField = span.find('input');
         });
 
         it('should have field name text as "Number field:"', function () {
-            expect(span1.text()).toBe("Number field: ");
+            expect(span.text()).toBe("Number field: ");
         });
 
         it('should have input field with type number', function () {
@@ -69,15 +69,15 @@ describe("FormBefore component", () => {
     });
 
     describe('field 3', function () {
-        let span1;
+        let span;
         let inputField;
         beforeEach(() => {
-            span1 = getComponent().find('form').childAt(2);
-            inputField = span1.find('input');
+            span = getComponent().find('form').childAt(2);
+            inputField = span.find('input');
         });
 
         it('should have field name text as "Password field:"', function () {
-            expect(span1.text()).toBe("Password field: ");
+            expect(span.text()).toBe("Password field: ");
         });
 
         it('should have input field with type password', function () {
