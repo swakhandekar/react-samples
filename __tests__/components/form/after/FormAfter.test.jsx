@@ -18,7 +18,37 @@ describe('FormAfter', () => {
 
         const form = component.find('form');
 
-        let inputFields = form.find(InputField);
+        const inputFields = form.find(InputField);
         expect(inputFields).toHaveLength(3);
+    });
+
+    it('should have a text field with a placeholder', function () {
+        component = getComponent();
+
+        const form = component.find('form');
+
+        const textField = form.find(InputField).at(0);
+        expect(textField.props().type).toBe('text');
+        expect(textField.props().placeholder).toBe('text field');
+    });
+
+    it('should have a number field with a placeholder', function () {
+        component = getComponent();
+
+        const form = component.find('form');
+
+        const numberField = form.find(InputField).at(1);
+        expect(numberField.props().type).toBe('number');
+        expect(numberField.props().placeholder).toBe('number field');
+    });
+
+    it('should have a password field with a placeholder', function () {
+        component = getComponent();
+
+        const form = component.find('form');
+
+        const textField = form.find(InputField).at(2);
+        expect(textField.props().type).toBe('password');
+        expect(textField.props().placeholder).toBe('password field');
     });
 });
