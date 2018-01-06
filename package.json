@@ -9,8 +9,8 @@
   "private": false,
   "scripts": {
     "start": "NODE_ENV=dev webpack-dev-server --port 3000",
-    "test": "NOCE_ENV=dev jest",
-    "test:watch": "NOCE_ENV=dev jest --watch"
+    "test": "NODE_ENV=dev jest",
+    "test:watch": "NODE_ENV=dev jest --watch"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
