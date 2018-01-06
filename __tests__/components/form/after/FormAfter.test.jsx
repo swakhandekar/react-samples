@@ -47,4 +47,15 @@ describe('FormAfter', () => {
         expect(textField.props().type).toBe('password');
         expect(textField.props().placeholder).toBe('password field');
     });
+
+    it('should have a submit button', () => {
+        component = getComponent();
+
+        const form = component.find('form');
+        const button = form.find('button');
+
+        expect(button).toHaveLength(1);
+        expect(button.text()).toBe('Submit');
+        expect(button.props().type).toBe('submit');
+    });
 });

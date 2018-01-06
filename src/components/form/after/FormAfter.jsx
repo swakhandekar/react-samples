@@ -7,5 +7,6 @@ export const FormAfter = () => (
         <InputField type="text" placeholder="text field"/>
         <InputField type="number" placeholder="number field"/>
         <InputField type="password" placeholder="password field"/>
+        <button type="submit">Submit</button>
     </form>
 );
