@@ -13,42 +13,43 @@ describe("FormBefore component", () => {
 
     it('should have a three input fields', () => {
         const component = getComponent();
+        const form = component.find("form");
 
-        let form = component.find("form");
         expect(form.find('input')).toHaveLength(3);
     });
 
-    it('should have a submit button', function () {
+    it('should have a submit button', () => {
         const component = getComponent();
+        const button = component.find('button');
 
-        let button = component.find('button');
         expect(button).toHaveLength(1);
         expect(button.props().type).toBe('submit');
     });
 
-    describe('field 1', function () {
+    describe('field 1', () => {
         let span;
         let inputField;
         let component;
+
         beforeEach(() => {
             component = getComponent();
             span = component.find('form').childAt(0);
             inputField = span.find('input');
         });
 
-        it('should have field name text as "Text field"', function () {
+        it('should have field name text as "Text field"', () => {
             expect(span.text()).toBe("Text field: ");
         });
 
-        it('should have input field with type text', function () {
+        it('should have input field with type text', () => {
             expect(inputField.props().type).toBe('text');
         });
 
-        it('should have input field with placeholder', function () {
+        it('should have input field with placeholder', () => {
             expect(inputField.props().placeholder).toBe('text field');
         });
 
-        it('should show error message on submit if the text entered is not valid', function () {
+        it('should show error message on submit if the text entered is not valid', () => {
             let form = component.find('form');
             form.simulate('submit', {
                 preventDefault: () => (null),
@@ -63,7 +64,7 @@ describe("FormBefore component", () => {
             expect(form.childAt(0).find('.error-message').text()).toBe('Please enter a valid text');
         });
 
-        it('should not show error message on submit if the text entered is valid', function () {
+        it('should not show error message on submit if the text entered is valid', () => {
             let form = component.find('form');
             form.simulate('submit', {
                 preventDefault: () => (null),
@@ -79,7 +80,7 @@ describe("FormBefore component", () => {
         });
     });
 
-    describe('field 2', function () {
+    describe('field 2', () => {
         let span;
         let inputField;
         let component;
@@ -89,19 +90,19 @@ describe("FormBefore component", () => {
             inputField = span.find('input');
         });
 
-        it('should have field name text as "Number field:"', function () {
+        it('should have field name text as "Number field:"', () => {
             expect(span.text()).toBe("Number field: ");
         });
 
-        it('should have input field with type number', function () {
+        it('should have input field with type number', () => {
             expect(inputField.props().type).toBe('number');
         });
 
-        it('should have input field with placeholder', function () {
+        it('should have input field with placeholder', () => {
             expect(inputField.props().placeholder).toBe('number field');
         });
 
-        it('should show error message on submit if the text entered is not valid', function () {
+        it('should show error message on submit if the text entered is not valid', () => {
             let form = component.find('form');
             form.simulate('submit', {
                 preventDefault: () => (null),
@@ -116,7 +117,7 @@ describe("FormBefore component", () => {
             expect(form.childAt(1).find('.error-message').text()).toBe('Please enter a valid number');
         });
 
-        it('should not show error message on submit if the text entered is valid', function () {
+        it('should not show error message on submit if the text entered is valid', () => {
             let form = component.find('form');
             form.simulate('submit', {
                 preventDefault: () => (null),
@@ -133,7 +134,7 @@ describe("FormBefore component", () => {
 
     });
 
-    describe('field 3', function () {
+    describe('field 3', () => {
         let span;
         let inputField;
         let component
@@ -143,19 +144,19 @@ describe("FormBefore component", () => {
             inputField = span.find('input');
         });
 
-        it('should have field name text as "Password field:"', function () {
+        it('should have field name text as "Password field:"', () => {
             expect(span.text()).toBe("Password field: ");
         });
 
-        it('should have input field with type password', function () {
+        it('should have input field with type password', () => {
             expect(inputField.props().type).toBe('password');
         });
 
-        it('should have input field with placeholder', function () {
+        it('should have input field with placeholder', () => {
             expect(inputField.props().placeholder).toBe('password field');
         });
 
-        it('should show error message on submit if the text entered is not valid', function () {
+        it('should show error message on submit if the text entered is not valid', () => {
             let form = component.find('form');
             form.simulate('submit', {
                 preventDefault: () => (null),
@@ -170,7 +171,7 @@ describe("FormBefore component", () => {
             expect(form.childAt(2).find('.error-message').text()).toBe('Password must be at least of 6 characters');
         });
 
-        it('should not show error message on submit if the text entered is valid', function () {
+        it('should not show error message on submit if the text entered is valid', () => {
             let form = component.find('form');
             form.simulate('submit', {
                 preventDefault: () => (null),
@@ -184,6 +185,5 @@ describe("FormBefore component", () => {
             form = component.find('form');
             expect(form.childAt(2).find('.error-message').text()).toBe('');
         });
-
     });
 });
