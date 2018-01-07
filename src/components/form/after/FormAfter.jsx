@@ -5,18 +5,13 @@ import {FormValidator} from "./formValidator";
 
 
 export class FormAfter extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            invalidTextField: false,
-            invalidNumberField: false,
-            invalidPasswordField: false,
-        };
+    state = {
+        invalidTextField: false,
+        invalidNumberField: false,
+        invalidPasswordField: false,
+    };
 
-        this.onFormSubmit = this.onFormSubmit.bind(this);
-    }
-
-    onFormSubmit(event) {
+    onFormSubmit = (event) => {
         event.preventDefault();
 
         const validTextField = FormValidator.isValidTextField(event.target[0].value);
