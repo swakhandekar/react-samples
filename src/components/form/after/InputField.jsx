@@ -23,5 +23,5 @@ InputField.propTypes = {
 
 InputField.defaultProps = {
     invalidField: false,
-    errorMessage: "",
+    errorMessage: "Please enter a valid value",
 };
