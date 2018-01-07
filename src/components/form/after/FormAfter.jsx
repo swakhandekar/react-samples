@@ -33,9 +33,9 @@ export class FormAfter extends React.Component {
         const {invalidTextField, invalidNumberField, invalidPasswordField} = this.state;
         return (
             <form onSubmit={this.onFormSubmit}>
-                <InputField type="text" placeholder="text field" invalidField={invalidTextField}/>
-                <InputField type="number" placeholder="number field" invalidField={invalidNumberField}/>
-                <InputField type="password" placeholder="password field" invalidField={invalidPasswordField}/>
+                <InputField type="text" label="Text Field" placeholder="text field" invalidField={invalidTextField}/>
+                <InputField type="number" label="Number Field" placeholder="number field" invalidField={invalidNumberField}/>
+                <InputField type="password" label="Password Field" placeholder="password field" invalidField={invalidPasswordField}/>
                 <button type="submit">Submit</button>
             </form>
         );
