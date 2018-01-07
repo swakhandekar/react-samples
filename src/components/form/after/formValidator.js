@@ -1,13 +1,13 @@
 export class FormValidator {
     static isValidTextField(textField) {
-        return true;
+        return !(!textField || textField === '');
     }
 
     static isValidNumberField(numberField) {
-        return true;
+        return !(!numberField || isNaN(parseInt(numberField)));
     }
 
     static isValidPasswordField(passwordField) {
-        return true;
+        return !(!passwordField || passwordField.length < 6);
     }
 }
